@@ -19,7 +19,7 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        return view('reservations.index', ['tables' => Table::with(['reservations' => fn($q) => $q->whereDay('since', '>', Carbon::now()->subDay())->orderBy('since', 'ASC')])->get()]);
+        return view('reservations.index', ['tables' => Table::with(['reservations' => fn($q) => $q->where('since', '>', Carbon::now()->subHours(2))->orderBy('since', 'ASC')])->get()]);
 
     }
 
@@ -101,6 +101,6 @@ class ReservationController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }

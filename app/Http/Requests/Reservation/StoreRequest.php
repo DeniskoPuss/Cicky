@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests\Reservation;
 
+use App\Models\Table;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -33,8 +36,21 @@ class StoreRequest extends FormRequest
             'date' => [
                 'required',
                 'date',
-                'after:today'
+                'after:today',
+
+                function ($attribute, $value, $fail) {
+                    $dateTimeFrom=Carbon::make($value);
+                    $dateTimeTo= Carbon::make($value);
+                    $table = Table::where('id', $this->table_id)->whereHas('reservations', function (Builder $query) use ($dateTimeFrom,$dateTimeTo) {
+                        $query->whereBetween('since', [$dateTimeFrom->subMinutes(119), $dateTimeTo->addMinutes(119)]);
+                    })->get();
+
+                    if($table->isNotEmpty()){
+                        $fail('Rezervácia pre tento čas je už vytvorená');
+                    }
+                }
             ],
+
             'table_id' => [
                 'required',
                 'numeric'

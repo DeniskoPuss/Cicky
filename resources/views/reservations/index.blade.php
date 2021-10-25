@@ -1,5 +1,4 @@
 <x-guest-layout>
-
     <div class="grid grid-cols-10 gap-4">
         @foreach($tables as $table)
             <div>
@@ -18,7 +17,6 @@
                             {{$reservation->since}}
                         </div>
                     @endforeach
-
                 </div>
             </div>
         @endforeach

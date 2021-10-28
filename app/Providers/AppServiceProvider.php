@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Reservation;
+use App\Models\Review;
 use App\Models\User;
 use App\Observers\ReservationObserver;
+use App\Observers\ReviewObserver;
 use App\Observers\UserObserver;
 use Illuminate\Support\ServiceProvider;
 
@@ -29,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         Reservation::observe(ReservationObserver::class);
+        Review::observe(ReviewObserver::class);
     }
 }

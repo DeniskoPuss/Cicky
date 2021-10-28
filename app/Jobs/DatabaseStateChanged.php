@@ -39,6 +39,39 @@ class DatabaseStateChanged implements ShouldQueue
     public function handle()
     {
         if ($this->event === 'created') {
+            if ($this->model_name === User::class) {
+                DB::transaction(function () {
+                    foreach (Config::get('database.sync') as $connection) {
+                        DB::connection($connection)
+                            ->table('users')
+                            ->insert([
+                                'name' => $this->model->name,
+                                'email' => $this->model->email,
+                                'email_verified_at' => $this->model->email_verified_at,
+                                'password' => $this->model->password,
+                                'remember_token' => $this->model->remember_token,
+                                'created_at' => Carbon::make($this->model->created_at)->format('Y-m-d H:i:s'),
+                                'updated_at' => Carbon::make($this->model->updated_at)->format('Y-m-d H:i:s'),
+                            ]);
+                    }
+                });
+            }
+            if ($this->model_name === Review::class) {
+                DB::transaction(function () {
+                    foreach (Config::get('database.sync') as $connection) {
+                        DB::connection($connection)
+                            ->table('reviews')
+                            ->insert([
+                                'user_id' => $this->model->user_id,
+                                'rating' => $this->model->rating,
+                                'review' => $this->model->review,
+                                'created_at' => Carbon::make($this->model->created_at)->format('Y-m-d H:i:s'),
+                                'updated_at' => Carbon::make($this->model->updated_at)->format('Y-m-d H:i:s'),
+                            ]);
+                    }
+                });
+            }
+
             if ($this->model_name === Reservation::class) {
                 DB::transaction(function () {
                     foreach (Config::get('database.sync') as $connection) {
@@ -56,12 +89,24 @@ class DatabaseStateChanged implements ShouldQueue
                 });
             }
         }
+
         if ($this->event === 'deleting') {
+
             if ($this->model_name === Reservation::class) {
                 DB::transaction(function () {
                     foreach (Config::get('database.sync') as $connection) {
                         DB::connection($connection)
                             ->table('reservations')
+                            ->where('id', $this->model)
+                            ->delete();
+                    }
+                });
+            }
+            if ($this->model_name === Review::class) {
+                DB::transaction(function () {
+                    foreach (Config::get('database.sync') as $connection) {
+                        DB::connection($connection)
+                            ->table('reviews')
                             ->where('id', $this->model)
                             ->delete();
                     }

@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // reviews
-Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
+Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('/reviews', ReviewController::class)

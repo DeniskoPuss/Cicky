@@ -29,6 +29,7 @@ class ReviewController extends Controller
      */
     public function create(): View
     {
+
         return view('reviews.create');
     }
 
@@ -74,8 +75,10 @@ class ReviewController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Review $review): RedirectResponse
     {
-        //
+        $review->delete();
+
+        return Redirect::route('reviews.index');
     }
 }

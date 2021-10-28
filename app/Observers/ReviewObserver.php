@@ -36,7 +36,7 @@ class ReviewObserver
      */
     public function deleting(Review $review)
     {
-        DatabaseStateChanged::dispatch($review, 'deleting', Review::class);
+        DatabaseStateChanged::dispatch($review->id, 'deleting', Review::class);
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,10 +23,28 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route::get('/reservations', [\App\Http\Controllers\ReservationController::class, 'index'])->name('reservations.index');
-Route::middleware(['auth'])->group(function (){
-    Route::get('/reservations/create/{table}', [\App\Http\Controllers\ReservationController::class, 'create'])->name('reservations.create');
-    Route::post('/reservations/{table}', [\App\Http\Controllers\ReservationController::class, 'store'])->name('reservations.store');
+// reservations
+Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/reservations/create/{table}', [ReservationController::class, 'create'])
+        ->name('reservations.create');
+    Route::post('/reservations/{table}', [ReservationController::class, 'store'])
+        ->name('reservations.store');
+    Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])
+        ->name('reservations.edit');
+    Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])
+        ->name('reservations.update');
+    Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])
+        ->name('reservations.destroy');
+});
+
+// reviews
+Route::get('reviews', [ReviewController::class, 'index'])->name('reviews.index');
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('/reviews', ReviewController::class)
+        ->except(['index', 'show']);
 });

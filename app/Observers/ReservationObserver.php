@@ -11,58 +11,52 @@ class ReservationObserver
     public $afterCommit = true;
 
     /**
-     * Handle the Reservation "created" event.
+     * @param Reservation $reservation
      *
-     * @param \App\Models\Reservation $reservation
      * @return void
      */
     public function created(Reservation $reservation)
     {
-        DatabaseStateChanged::dispatch($reservation,'created',Reservation::class);
-
+        DatabaseStateChanged::dispatch($reservation, 'created', Reservation::class);
     }
 
     /**
-     * Handle the Reservation "updated" event.
+     * @param Reservation $reservation
      *
-     * @param \App\Models\Reservation $reservation
      * @return void
      */
-    public function updated(Reservation $reservation)
+    public function updating(Reservation $reservation)
     {
-        DatabaseStateChanged::dispatch($reservation,'updated',Reservation::class);
+        DatabaseStateChanged::dispatch($reservation, 'updating', Reservation::class);
     }
 
     /**
-     * Handle the Reservation "deleted" event.
+     * @param Reservation $reservation
      *
-     * @param \App\Models\Reservation $reservation
      * @return void
      */
-    public function deleted(Reservation $reservation)
+    public function deleting(Reservation $reservation)
     {
-        DatabaseStateChanged::dispatch($reservation,'deleted',Reservation::class);
+        DatabaseStateChanged::dispatch($reservation->id, 'deleting', Reservation::class);
     }
 
     /**
-     * Handle the Reservation "restored" event.
+     * @param Reservation $reservation
      *
-     * @param \App\Models\Reservation $reservation
      * @return void
      */
     public function restored(Reservation $reservation)
     {
-        DatabaseStateChanged::dispatch($reservation,'restored',Reservation::class);;
+        DatabaseStateChanged::dispatch($reservation, 'restored', Reservation::class);
     }
 
     /**
-     * Handle the Reservation "force deleted" event.
+     * @param Reservation $reservation
      *
-     * @param \App\Models\Reservation $reservation
      * @return void
      */
     public function forceDeleted(Reservation $reservation)
     {
-        DatabaseStateChanged::dispatch($reservation,'forceDeleted',Reservation::class);
+        DatabaseStateChanged::dispatch($reservation, 'forceDeleted', Reservation::class);
     }
 }

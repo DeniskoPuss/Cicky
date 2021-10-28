@@ -6,7 +6,7 @@ module.exports = {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
-
+    darkMode: 'class',
     theme: {
         extend: {
             fontFamily: {
@@ -14,12 +14,10 @@ module.exports = {
             },
         },
     },
-
     variants: {
         extend: {
             opacity: ['disabled'],
         },
     },
-
     plugins: [require('@tailwindcss/forms')],
 };

@@ -10,7 +10,8 @@
                         <img src="{{ asset('images/StolZabrany.png') }}" class="block w-14 mx-auto">
                     @endif
                     @if(Auth::user())
-                        <a href="{{ route('reservations.create', $table->id) }}" class="inline-block mt-2 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-yellow-500 hover:bg-yellow-600 hover:shadow-lg">Reserve</a>
+                        <a href="{{ route('reservations.create', $table->id) }}"
+                           class="inline-block mt-2 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-yellow-500 hover:bg-yellow-600 hover:shadow-lg">Reserve</a>
                     @endif
                 </div>
                 @foreach($table->reservations as $reservation)
@@ -21,7 +22,8 @@
                                 <form action="{{ route('reservations.destroy', $reservation->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">
+                                    <button type="submit"
+                                            class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">
                                         Delete
                                     </button>
                                 </form>

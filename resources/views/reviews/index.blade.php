@@ -1,6 +1,8 @@
 <x-guest-layout>
-    <div class="container mx-auto">
+    <div class="justify-items-start place-content-center">
+        <p class="font-mono">
         <a href="{{ route('reviews.create') }}" class="inline-block m-4 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">Pridať recenziu</a>
+        </p>
         @foreach($reviews as $review)
             <div class="grid grid-cols-4 text-4xl font-extrabold italic mb-4">
                 <div>{{ $review->user->name }}</div>
@@ -9,13 +11,16 @@
                 <div>
                     @if(Auth::id() === $review->user_id)
                         <div>{{ $review->since }}</div>
+
                         <div>
                             <form action="{{ route('reviews.destroy', $review->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
+                                <p class="font-mono">
                                 <button type="submit" class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">
                                     Delete
                                 </button>
+                                </p>
                             </form>
                         </div>
                     @endif

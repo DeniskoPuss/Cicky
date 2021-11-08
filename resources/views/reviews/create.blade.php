@@ -18,7 +18,7 @@
                     @endif
                     <form action="{{ route('reviews.store') }}" method="POST">
                         @csrf
-                        <div class="shadow overflow-hidden sm:rounded-md">
+                        <div class="shadow overflow-hidden sm:rounded-md font-serif">
                             <div class="px-4 py-5 bg-white sm:p-6">
                                 <div class="grid grid-cols-6 gap-6">
                                     <div class="col-span-6 sm:col-span-3">
@@ -33,10 +33,15 @@
                                 </div>
                             </div>
                             <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                                <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                <button>
+                                    <a href="{{ route('dashboard') }}" class="inline-block mt-2 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-yellow-500 hover:bg-yellow-600 hover:shadow-lg">Back</a>
+                                </button>
+                                <button type="submit" class="inline-block mt-2 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-yellow-500 hover:bg-yellow-600 hover:shadow-lg">
                                     Save
                                 </button>
+
                             </div>
+
                         </div>
                     </form>
                 </div>

@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title> <!-- Fonts -->
+    <title>Puššméthyho Dobroty</title> <!-- Fonts -->
+    <link rel="icon" href="{{ url('images/MaleLogo.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url('css/style.css') }}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- Scripts -->
@@ -12,33 +14,26 @@
 </head>
 <body class="antialiased">
 <div class="min-h-full">
-    <nav class="bg-gray-800">
+    <nav class="bg-yellow-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
+                        <img src="{{ asset('images/MaleLogo.png') }}"width="50">
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
                             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
 
-                            <a href="{{route("reservations.index")}}" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Rezervácie</a>
+                            <a href="{{route("reservations.index")}}" class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-yellow-500 hover:bg-black hover:shadow-lg font-serif">Rezervácie</a>
 
-                            <a href="{{route("reviews.index")}}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Hodnotenia</a>
-
+                            <a href="{{route("reviews.index")}}" class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-yellow-500 hover:bg-black hover:shadow-lg font-serif">Hodnotenia</a>
                         </div>
                     </div>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-4 flex items-center md:ml-6">
-                        <button type="button" class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                            <span class="sr-only">View notifications</span>
-                            <!-- Heroicon name: outline/bell -->
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                            </svg>
-                        </button>
+
 
                         <!-- Profile dropdown -->
                         <div class="ml-3 relative">
@@ -69,7 +64,8 @@
                             @if (Route::has('login'))
                             <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                 @auth
-                                <a href="{{route("reservations.index")}}" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Rezervácie</a>
+                                <a href="{{route("reservations.index")}}" class="block px-4 py-2 text-sm text-gray-700 font-serif" role="menuitem" tabindex="-1" id="user-menu-item-0">Rezervácie</a>
+                                    <a href="{{route("reviews.index")}}" class="block px-4 py-2 text-sm text-gray-700 font-serif" role="menuitem" tabindex="-1" id="user-menu-item-0">Hodnotenia</a>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
                                         <x-dropdown-link :href="route('logout')"
@@ -116,7 +112,7 @@
 
         <!-- Mobile menu, show/hide based on menu state. -->
         <div class="md:hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 font-serif">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>
 
@@ -156,18 +152,12 @@
         </div>
     </nav>
 
-    <header class="bg-white shadow">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl font-bold text-gray-900">
-                Dashboard
-            </h1>
-        </div>
-    </header>
+
     <main>
-        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-            <!-- Replace with your content -->
-            <div class="px-4 py-6 sm:px-0">
-                <div class="border-4 border-dashed border-gray-200 rounded-lg h-96"></div>
+        <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 leading-loose tracking-tighter font-serif">
+            <img src="{{ asset('images/UvodneLogo.png') }}" class="mx-auto">
+            Reštaurácia u Puššméthyho je reštaurácia s dlhovekou tradíciou. Založená bola v roku 2021 dvomi kamarátmi, Denisom Puššom a Róbertom Némethym. Naša reštaurácia ponúka rôzne druhy jedál. Robíme domáce jedlá, od biftekov, steakov, až po domáce pečené a grilované ryby. Na našej webovej stránke si môžete rezervovať stôl, na presný čas. Stôl bude pre vás rezervovaný na 2 hodiny, v prípade potreby a po osobnej konzultácií je možné rezerváciu predĺžiť. Budeme radi keď nám v záložke "hodnotenia" zanecháte svoju spätnú väzbu, či už pozitívnu alebo negatívnu, každé hodnotenie je pre nás dôležité. Ďakujeme za vašu návštevu a dúfame že vám bude chutiť!
+
             </div>
             <!-- /End replace -->
         </div>

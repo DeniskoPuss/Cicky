@@ -1,7 +1,8 @@
 <x-guest-layout>
-    <div class="grid grid-cols-10 dark:bg-gray-400 h-screen">
+
+    <div class="grid grid-cols-10 dark:bg-gray-400 h-screen font-serif">
         @foreach($tables as $table)
-            <div class="grid-cols-1 text-center items-center">
+            <div class="grid-cols-1 text-center items-center font-serif">
                 <div>
                     <span class="text-2xl">{{ $table->name }}</span>
                     @if ($table->reservations->isEmpty())
@@ -11,7 +12,7 @@
                     @endif
                     @if(Auth::user())
                         <a href="{{ route('reservations.create', $table->id) }}"
-                           class="inline-block mt-2 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-yellow-500 hover:bg-yellow-600 hover:shadow-lg">Reserve</a>
+                           class="inline-block mt-2 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-yellow-500 hover:bg-yellow-600 hover:shadow-lg font-serif">Reserve</a>
                     @endif
                 </div>
                 @foreach($table->reservations as $reservation)
@@ -23,7 +24,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
-                                            class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg">
+                                            class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-purple-500 hover:bg-purple-600 hover:shadow-lg font-serif">
                                         Delete
                                     </button>
                                 </form>
@@ -35,5 +36,11 @@
                 @endforeach
             </div>
         @endforeach
+        <div>
+            <button>
+
+            <a href="{{ url()->previous() }}" class="inline-block mt-2 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-yellow-500 hover:bg-yellow-600 hover:shadow-lg">Back</a>
+            </button>
+        </div>
     </div>
 </x-guest-layout>

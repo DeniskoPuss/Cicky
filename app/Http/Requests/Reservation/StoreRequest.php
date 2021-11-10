@@ -36,7 +36,7 @@ class StoreRequest extends FormRequest
             'date' => [
                 'required',
                 'date',
-                'after:today',
+                'after:now',
 
                 function ($attribute, $value, $fail) {
                     $dateTimeFrom=Carbon::make($value);
@@ -46,7 +46,7 @@ class StoreRequest extends FormRequest
                     })->get();
 
                     if($table->isNotEmpty()){
-                        $fail('Rezervácia pre tento čas je už vytvorená');
+                        $fail('Rezervácia už je vytvorená a platí 2 hodiny, prosím vyberte iný čas');
                     }
                 }
             ],
